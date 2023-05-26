@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="clouds.css">
+
+  <script src="script.js"></script>
+  <script>
+    currentScreen=2
+  </script>
+
+  <title>Super Matt Westwick World - Mobile Friendly</title>
+</head>
+<body>
+  <h1 style="display:none;">Matt Westwick</h1>
+  <h2 style="display:none;">Full Stack Developer</h2>
+
+  <div id="rightButton"></div>
+  <div id="leftButton"></div>
+
+  <div id="messageOverlay"
+    onclick="document.getElementById('messageOverlay').classList.remove('active'); document.getElementById('messageBox').classList.remove('active');window.INPUT.keys.allowInput = true;document.getElementById('formSubmitButton').style.visibility = 'hidden';">
+    <div id="messageBox" class="messageBox" onclick="event.stopPropagation()">
+      <div id="messageText" class="messageText"></div>
+      <div style="width:100%;display:flex;flex:row;justify-content:space-evenly;">
+        <div id="formSubmitButton" class="messageCloseButton" onclick="(() => {submitForm()})()"
+          style="visibility: hidden;">SUBMIT</div>
+        <div class="messageCloseButton"
+          onclick="event.stopPropagation(); document.getElementById('messageOverlay').classList.remove('active'); document.getElementById('messageBox').classList.remove('active');window.INPUT.keys.allowInput=true;document.getElementById('formSubmitButton').style.visibility = 'hidden';">
+          CLOSE</div>
+      </div>
+  
+    </div>
+  </div>
+
+  <div class='sprite' id='sprite'></div>
+  
+  <div id='background-container'>
+    <div id='level-container'>
+      <div class="pages">
+        <div class="page home">
+          <div class="title-container">
+            <img class="small-title" src="./images/super.png" alt="super">
+            <img src="./images/matt_world.png" alt="matt world">
+            <div class="subheader">Swipe to find out more! ></div>
+          </div>
+        </div>
+  
+        <div class="page bio">
+          <div class="title-container">
+            <img src="./images/about_me.png" alt="about me">
+            <div class="page-info message-text">Hey! I’m Matt!<br><br>I’m a Mechanical-turned-Software engineer who absolutely loves to solve problems (no matter how big or small). <br><br>Feel free to get in touch using the links below!</div>
+          </div>
+
+          <div class="obstacle-container">
+            <div class="github obstacle">
+              <a title="Github" target="_blank" rel="noopener noreferrer" href="https://github.com/prphntm63">
+                <div style="height:100%;width:100%;"></div>
+              </a>
+            </div>
+            <div class="linkedin obstacle">
+              <a title="LinkedIn" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/mattwestwick/">
+                <div style="height:100%;width:100%;">
+                </div>
+              </a>
+            </div>
+            <div class="mail obstacle">
+              <div 
+                title="Contact"
+                style="height:100%;width:100%;cursor:pointer;" 
+                onclick="(function(){
+                  document.getElementById('messageOverlay').classList.add('active');
+                  document.getElementById('messageBox').classList.add('active');
+                  document.getElementById('messageText').innerHTML = `${email_form_html}`;
+                  document.getElementById('formSubmitButton').style.visibility = 'visible';
+                })();return false;"
+              >
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="page brewing">
+          <div class="title-container">
+            <img src="./images/brewing.png" alt="brewing">
+            <div class="page-info message-text">One of my favorite pastimes is homebrewing. I am deeply involved in the local community, have won multiple awards for my recipes, and am an experienced <a target=_blank  class=underline href=https://www.bjcp.org/> BJCP judge</a>. <br><br> One thing I particularly love to do is integrate IoT technology into my workflow; every step of the process is measured and digitalized so I can keep accurate measurements.<br><br>You can find all my recipes and past brew sessions on my <a target=_blank  class=underline href=https://www.brewersfriend.com/homebrew/brewer/224060/matlab->BrewersFriend</a> page!</div>
+
+          </div>
+          <div class="obstacle-container">
+            <div class="brewersfriend obstacle">
+              <a title="BrewersFriend" target="_blank" rel="noopener noreferrer" href="https://www.brewersfriend.com/homebrew/brewer/224060/matlab-">
+                <div style="height:100%;width:100%;"></div>
+              </a>
+            </div>
+          </div>
+        </div>
+  
+        <div class="page code">
+          <div class="title-container">
+            <img class="small-title" src="./images/code.png" alt="code">
+            <div class="page-info message-text">I really do love doing passion projects in my spare time. It is a great way to learn new technologies and to give back to the communities you are a part of.<br><br> I would consider my forte to be Typescript and Javascript using React/Redux, Angular, and NodeJS. However, I have a great working knowledge of Python and Golang along with popular frameworks. I’m also pretty handy when it comes to DevExp, with some substantial experience with Docker, Kubernetes, and Google Cloud Platform!<br><br>Feel free to check out my <a target=_blank  class=underline href=https://github.com/prphntm63>Github Profile</a> for a more detailed view of my current and past work.</div>
+          </div>
+          <div class="obstacle-container">
+            <div class="github obstacle">
+              <a title="Github" target="_blank" rel="noopener noreferrer" href="https://github.com/prphntm63">
+                <div style="height:100%;width:100%;"></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class='floor'></div>
+    </div>
+
+    <div id="scenery-container"></div>
+    
+    <div id="background-wrap">
+      <div class="x1">
+        <div class="cloud"></div>
+      </div>
+      <div class="x2">
+        <div class="cloud"></div>
+      </div>
+      <div class="x3">
+        <div class="cloud"></div>
+      </div>
+      <div class="x4">
+        <div class="cloud"></div>
+      </div>
+      <div class="x5">
+        <div class="cloud"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    setCurrentPage(2)
+    setupSidebuttons()
+  </script>
+</body>
+</html>
