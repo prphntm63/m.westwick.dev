@@ -53,8 +53,8 @@ img {
   width: 15vw;
   height: 100vh;
   left: 85vw;
-  bottom: 0px;
-  z-index: 1000;
+  bottom:50px;
+  z-index: 500;
 }
 
 #leftButton {
@@ -62,8 +62,8 @@ img {
   width: 15vw;
   height: 100vh;
   left: 0px;
-  bottom: 0px;
-  z-index: 1000;
+  bottom: 50px;
+  z-index: 500;
 
 }
 
@@ -224,7 +224,7 @@ img {
   z-index: 999;
   overflow: visible;
   image-rendering: pixelated;
-  bottom: 10px;
+  bottom: 34px;
   left: 20vw;
 }
 
@@ -238,9 +238,35 @@ img {
   position: fixed;
   left: 0px;
   bottom: 0px;
-  height: 11px;
-  width: 500vw;
-  background-color: olivedrab;
+  height: 35px;
+  width: 100vw;
+  background-image: url(./images/ground.png);
+  background-repeat: repeat-x;
+  /* background-position: 0, 0; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.navlink {
+  width: 20vw;
+  color: #310;
+  text-align: center;
+  height: 18px;
+  margin-top: 10px;
+  padding-top: 2px;
+  z-index: 9998;
+}
+
+#navselector {
+  position: fixed;
+  left: calc(2.5vw);
+  bottom: 2px;
+  width: 22vw;
+  height: 22px;
+  border: 2px solid #310;
+  border-radius: 4px;
+  z-index: 999;
 }
 
 .pages {

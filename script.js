@@ -1,5 +1,5 @@
 const pagePaths = ['/', '/bio', '/brew', '/code']
-const scrollSpeed = 5
+const scrollSpeed = 9
 let currentScreen = 0
 let touchstartX = 0
 let touchendX = 0
@@ -12,6 +12,9 @@ const setCurrentPage = (pageId = 0) => {
   const screenWidth = window.innerWidth
   document.getElementById('level-container').style.left = -pageId*screenWidth + 'px'
   document.getElementById('scenery-container').style.left = -parseInt(0.25 * pageId*screenWidth) + 'px'
+
+  // Set up nav selector box
+  document.getElementById('navselector').style.left = parseInt(screenWidth*(.025 + pageId*0.24)) + 'px'
 }
 
 const email_form_html = `
@@ -84,6 +87,28 @@ function scrollScreen(direction = 'right') {
 
   requestAnimationFrame(animateScroll)
 }
+
+function scrollToScreen(targetScreenId = 0) {
+  if (handlingAnimation) return
+  if (targetScreenId === currentScreen) return
+
+  const totalMovement = window.innerWidth * -(targetScreenId - currentScreen)
+  finalAnimationCounter = Math.abs(totalMovement / scrollSpeed)
+  handlingAnimation = true
+  document.getElementById('sprite').style.backgroundImage = "url(./images/run.gif)"
+
+  if (totalMovement > 0) {
+    document.getElementById('sprite').style.transform = 'scaleX(-1)'
+    directionMultiplier = 1
+  } else if (totalMovement < 0) {
+    document.getElementById('sprite').style.transform = 'scaleX(1)'
+    directionMultiplier = -1
+  }
+
+  currentScreen = targetScreenId
+
+  requestAnimationFrame(animateScroll)
+}
     
 function checkSwipeDirection() {
   const magnitude = Math.abs(touchendX - touchstartX)
@@ -101,7 +126,9 @@ function checkSwipeDirection() {
 function animateScroll() {
   const currentPosition = document.getElementById('level-container').getBoundingClientRect()
   document.getElementById('level-container').style.left = (parseInt(currentPosition.left) + (directionMultiplier*scrollSpeed)) + 'px'
+  document.getElementById('floor').style.backgroundPositionX =(parseInt(currentPosition.left) + (directionMultiplier*scrollSpeed)) + 'px'
   document.getElementById('scenery-container').style.left = parseInt(0.25 * (parseInt(currentPosition.left) + (directionMultiplier*scrollSpeed))) + 'px'
+  document.getElementById('navselector').style.left = parseInt((window.innerWidth*.025) + (-0.24 * (parseInt(currentPosition.left) + (directionMultiplier*scrollSpeed)))) + 'px'
   animationCounter += 1
 
   if (animationCounter < finalAnimationCounter) {
@@ -125,12 +152,34 @@ document.addEventListener('touchend', e => {
   checkSwipeDirection()
 })
 
-const setupSidebuttons = () => {
-  document.getElementById('rightButton').addEventListener("click", () => {
+const setupButtons = () => {
+  document.getElementById('rightButton').addEventListener("click", (evt) => {
+    evt.stopPropagation()
     scrollScreen('right')
   })
   
-  document.getElementById('leftButton').addEventListener("click", () => {
+  document.getElementById('leftButton').addEventListener("click", (evt) => {
+    evt.stopPropagation()
     scrollScreen('left')
+  })
+
+  document.getElementById('home').addEventListener("click", (evt) => {
+    evt.stopPropagation()
+    scrollToScreen(0)
+  })
+
+  document.getElementById('bio').addEventListener("click", (evt) => {
+    evt.stopPropagation()
+    scrollToScreen(1)
+  })
+
+  document.getElementById('brew').addEventListener("click", (evt) => {
+    evt.stopPropagation()
+    scrollToScreen(2)
+  })
+
+  document.getElementById('code').addEventListener("click", (evt) => {
+    evt.stopPropagation()
+    scrollToScreen(3)
   })
 }
